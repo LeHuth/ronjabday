@@ -6,15 +6,27 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "lint": "eslint --ext .js,.ts ."
   },
   "engines": {
     "node": "16.13.1"
   },
   "devDependencies": {
-    "nuxt": "^3.2.2"
+    "@types/three": "^0.149.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "nuxt": "^3.2.2",
+    "three": "^0.150.1",
+    "typescript": "*"
   },
   "dependencies": {
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
     "moment": "^2.29.4"
   }
 }

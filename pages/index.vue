@@ -1,5 +1,6 @@
 <template>
   <Countdown/>
+  <Experience/>
 </template>
 
 <script setup>
