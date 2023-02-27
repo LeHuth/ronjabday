@@ -2,12 +2,12 @@
 <script setup lang="ts">
 import {Scene, PerspectiveCamera, Mesh, SphereGeometry, MeshBasicMaterial, WebGLRenderer} from 'three'
 import {Ref} from "vue";
+import {useWindowSize} from "@vueuse/core";
 const experience: Ref<HTMLCanvasElement | null> = ref(null)
 const scene = new Scene()
-const width = 800
-const height = 600
-
-const camera = new PerspectiveCamera(75,width/height, 0.1, 1000)
+const {width, height} = useWindowSize()
+const aspectRatio = computed(()=>width.value/height.value)
+const camera = new PerspectiveCamera(75, aspectRatio.value, 0.1, 1000)
 camera.position.set(0,0,3)
 const sphere = new Mesh(
     new SphereGeometry(1,32,32),
@@ -25,7 +25,7 @@ onMounted(()=> {
         const renderer = new WebGLRenderer({
             canvas: experience.value
         })
-        renderer.setSize(width, height)
+        renderer.setSize(width.value, height.value)
         renderer.render(scene, camera)
     }
 })
