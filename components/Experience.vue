@@ -1,10 +1,21 @@
 
 <script setup lang="ts">
-import {Scene, PerspectiveCamera, Mesh,sRGBEncoding, SphereGeometry,RectAreaLight, MeshBasicMaterial, WebGLRenderer, BoxGeometry} from 'three'
+import {
+    Scene,
+    PerspectiveCamera,
+    Mesh,
+    sRGBEncoding,
+    SphereGeometry,
+    RectAreaLight,
+    MeshBasicMaterial,
+    WebGLRenderer,
+    BoxGeometry,
+    ColorManagement,
+} from 'three'
 import {Ref} from "vue";
 import {useWindowSize} from "@vueuse/core";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const experience: Ref<HTMLCanvasElement | null> = ref(null)
 const scene = new Scene()
@@ -12,6 +23,7 @@ const glftLoader = new GLTFLoader()
 let renderer: WebGLRenderer
 let camera: PerspectiveCamera
 let controls: OrbitControls
+ColorManagement.enabled = true
 
 const {width, height} = useWindowSize()
 const aspectRatio = computed(()=>width.value/(height.value-150))
@@ -51,7 +63,8 @@ const setupRenderer = () => {
         renderer = new WebGLRenderer({
             canvas: experience.value, alpha: true,
         })
-        renderer.outputEncoding = sRGBEncoding
+        renderer.outputEncoding = sRGBEncoding;
+        renderer.gammaOutput = true;
         controls = new  OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true
         updateRenderer()
