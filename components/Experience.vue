@@ -37,19 +37,24 @@ const sphere = new Mesh(
 
 
 //scene.add(camera)
-glftLoader.load('/models/rbday.gltf', gltf => {
-    console.log(gltf)
-    scene.add(gltf.scene)
-    scene.add(gltf.cameras[0])
-    const width = 100;
-    const height = 100;
-    const intensity = 4;
-    const rectLight = new RectAreaLight( '#FFFFFF', intensity,  width, height );
-    rectLight.position.set( -10, 35, 14 );
-    rectLight.lookAt( 0, 0, 0 );
-    scene.add(rectLight)
+try {
+    glftLoader.load('/models/rbday.gltf', gltf => {
+        console.log(gltf)
+        scene.add(gltf.scene)
+        scene.add(gltf.cameras[0])
+        const width = 100;
+        const height = 100;
+        const intensity = 4;
+        const rectLight = new RectAreaLight( '#FFFFFF', intensity,  width, height );
+        rectLight.position.set( -10, 35, 14 );
+        rectLight.lookAt( 0, 0, 0 );
+        scene.add(rectLight)
 
-})
+    })
+} catch (e) {
+    console.log('weird error')
+}
+
 const updateRenderer = () => {
     renderer.setSize(width.value, height.value-150)
     renderer.render(scene, camera)
