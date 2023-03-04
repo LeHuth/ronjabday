@@ -10,7 +10,7 @@ import {
     MeshBasicMaterial,
     WebGLRenderer,
     BoxGeometry,
-    ColorManagement,
+    ColorManagement,AmbientLight
 } from 'three'
 import {Ref} from "vue";
 import {useWindowSize} from "@vueuse/core";
@@ -42,13 +42,15 @@ try {
         console.log(gltf)
         scene.add(gltf.scene)
         scene.add(gltf.cameras[0])
-        const width = 100;
-        const height = 100;
-        const intensity = 4;
+        const width = 25;
+        const height = 25;
+        const intensity = 15;
         const rectLight = new RectAreaLight( '#FFFFFF', intensity,  width, height );
+        const light = new AmbientLight( 0x404040,15); // soft white light
         rectLight.position.set( -10, 35, 14 );
-        rectLight.lookAt( 0, 0, 0 );
-        scene.add(rectLight)
+        rectLight.lookAt(0,0,0)
+        scene.add( light );
+        scene.add( rectLight );
 
     })
 } catch (e) {
